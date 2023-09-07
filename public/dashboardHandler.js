@@ -1,6 +1,13 @@
 function changeInput(value) {
   // Write code to get the element for "input"
   // Set the inputElement.value as value
+  const inputElement = document.getElementById("inputField");
+  if (inputElement) {
+    // Set the value of the input element
+    inputElement.value = value;
+  } else {
+    console.error("Input element not found.");
+  }
 }
 
 async function handleEdit(e) {
@@ -42,6 +49,26 @@ async function populateHistory() {
         // 3. Append textField and deleteButton as children to the divElement.
 
         // 4. Append the divElement as a child to the historyElemenet.
+
+        // Attach an event listener to the deleteButton
+        deleteButton.addEventListener("click", async () => {
+          const promptId = divElement.getAttribute("data-id");
+          console.log(promptId);
+          const isDeleted = await deletePrompt(promptId);
+          console.log("HELLO");
+
+          if (isDeleted) {
+            // Remove the divElement from the DOM
+            divElement.remove();
+          }
+        });
+
+        // Append textField and deleteButton as children to the divElement
+        divElement.appendChild(textField);
+        divElement.appendChild(deleteButton);
+
+        // Append the divElement as a child to the historyElement
+        historyElement.appendChild(divElement);
       });
     } else {
       console.log("Error fetching prompt list");
@@ -92,8 +119,17 @@ async function updateUserPrompt(promptId, updatedPrompt) {
   // 4. Check if jsonData.msg is true? If yes return true: Else return false
   try {
     // const response = Make PUT request. Replace with Code.
+    const response = await fetch(`/update_user_prompt/${promptId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
     if (response.status === 200) {
-      // Write code here.
+      const jsonData = await response.json();
+      return jsonData.msg === true;
     } else {
       console.log("Error updating Prompt.");
     }

@@ -148,12 +148,12 @@ async function updatePrompt(id, incomingUpdatedPrompt) {
 // Function to delete a prompt
 async function deletePrompt(id) {
   try {
-    // console.log(id);
+    console.log(id);
     const dbResult = await dbOperations.deleteExistingPrompt(id);
-    // console.log(dbResult);
+    console.log(dbResult);
     return dbResult;
   } catch (error) {
-    // console.log(error);
+    console.log(error);
     return null;
   }
 }

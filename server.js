@@ -50,12 +50,18 @@ app.get("/", (req, res) => {
   // TO DO - Add Authentication for this route . If the user is authenticated redirect to the dashboard else send the login.html page
   // Hints - Have Look inside req object for the Authentication method.
   // Based on return value of that method: If true: redirect response(res) to /dashboard else send login.html in response(res).
+  if (req.isAuthenticated()) {
+    res.redirect("/dashboard");
+  }
   res.sendFile("login.html", { root: path.join(__dirname, "views") });
 });
 
 app.get("/login", (req, res) => {
   // TO DO - Add Authentication for this route . If the user is authenticated redirect to the dashboard else send the login.html page
   // // Hints - Have Look inside req object for the Authentication method.
+  if (req.isAuthenticated()) {
+    res.redirect("/dashboard");
+  }
   res.sendFile("login.html", { root: path.join(__dirname, "views") });
 });
 
@@ -68,7 +74,7 @@ app.get("/create-user", (req, res) => {
 // 1. Add a middleware to handle authentication. Look at how middlewares are added to a route.
 // 2. Good Part - The middleware files have been already created for you.
 // 3. Figure out based on funtionality which will be appropriate to be used here.
-app.get("/update-user", (req, res) => {
+app.get("/update-user", middleware(), (req, res) => {
   res.sendFile("./views/update_user.html", { root: __dirname });
 });
 
@@ -76,7 +82,7 @@ app.get("/update-user", (req, res) => {
 // Add a middleware to handle authentication.
 // The middleware files have been already created for you.
 // Figure out based on funtionality which will be appropriate to be used here.
-app.get("/dashboard", (req, res) => {
+app.get("/dashboard", middleware(), (req, res) => {
   res.sendFile("./views/dashboard.html", { root: __dirname });
 });
 
@@ -101,10 +107,13 @@ app.get("/logout", function (req, res, next) {
 
 app.get("/get_prompt_list", authenticateInternal(), async (req, res) => {
   try {
-    // WRITE
-    //      YOUR
-    //          CODE
-    //              HERE.
+    const { email } = req.user;
+    const data = await crudOperations.getPromptList(email);
+    if (data !== null && data !== false) {
+      res.json({ msg: data });
+    } else {
+      res.json({ msg: [] });
+    }
   } catch (error) {
     console.error(error);
     res.json({
@@ -193,15 +202,20 @@ app.post("/login", passport.authenticate("local"), (req, res) => {
 // 6. Handle the result as following:
 //    6.1. If result is true return a json response as {msg: true}
 //    6.2. Else return {msg: false}
-app.post("/update_user", async (req, res) => {
+app.post("/update_user", authenticateInternal(), async (req, res) => {
   try {
     let { firstname, lastname, emailId } = req.body;
 
-    // const result = replaceFunctionHere(a, b, c);
-    // WRITE
-    //      YOUR
-    //          CODE
-    //              HERE.
+    const result = await crudOperations.updateUser(
+      firstname,
+      lastname,
+      emailId
+    );
+    if (result === true) {
+      res.json({ msg: true });
+    } else {
+      res.json({ msg: false });
+    }
   } catch (error) {
     console.log(error);
     res.json({
@@ -214,7 +228,7 @@ app.post("/update_user", async (req, res) => {
 // 1. Add a middleware to handle authentication
 // 2. The middleware files have been already created for you.
 // 3. Figure out based on funtionality which will be appropriate to be used here.
-app.post("/create_user_prompt", async (req, res) => {
+app.post("/create_user_prompt", authenticateInternal(), async (req, res) => {
   try {
     const { prompt } = req.body;
     const { name, email } = req.user;
@@ -241,23 +255,27 @@ app.post("/create_user_prompt", async (req, res) => {
 // 1. Add a middleware to handle authentication
 // 2. The middleware files have been already created for you.
 // 3. Figure out based on funtionality which will be appropriate to be used here.
-app.put("/update_user_prompt/:id", replaceHere(), async (req, res) => {
+app.put("/update_user_prompt/:id", authenticateInternal(), async (req, res) => {
   try {
     // TO DO - Add Authentication for this route
     // Check if the user has permissions (proper role) to approve / complete the request
     // If user has permissions then proceed else return json: {"msg": false}
+    const user = req.user;
+    if (user && user.role === 1) {
+      const id = req.params.id;
+      const updatedPrompt = req.body.prompt; // Extract the updated prompt from the request body
 
-    const id = req.params.id;
-    const updatedPrompt = req.body.prompt; // Extract the updated prompt from the request body
+      const isUpdated = await crudOperations.updatePrompt(id, updatedPrompt);
 
-    const isUpdated = await crudOperations.updatePrompt(id, updatedPrompt);
-
-    if (isUpdated) {
-      console.log(`Updated Prompt for id -> ${id}`);
-      console.log(req.body);
-      res.json({ msg: true });
+      if (isUpdated) {
+        console.log(`Updated Prompt for id -> ${id}`);
+        console.log(req.body);
+        res.json({ msg: true });
+      } else {
+        console.log(`Failed to update request for id -> ${id}`);
+        res.json({ msg: false });
+      }
     } else {
-      console.log(`Failed to update request for id -> ${id}`);
       res.json({ msg: false });
     }
   } catch (error) {
@@ -272,28 +290,38 @@ app.put("/update_user_prompt/:id", replaceHere(), async (req, res) => {
 // 1. Add a middleware to handle authentication
 // 2. The middleware files have been already created for you.
 // 3. Figure out based on funtionality which will be appropriate to be used here.
-app.delete("/delete_user_prompt/:id", replaceHere(), async (req, res) => {
-  try {
-    // TO DO - Add Authentication for this route
-    // Check if the user has permission's (proper role) to cancel the request
-    // If user has permissions then proceed else return json: {"msg": false}
+app.delete(
+  "/delete_user_prompt/:id",
+  authenticateInternal(),
+  async (req, res) => {
+    try {
+      // TO DO - Add Authentication for this route
+      // Check if the user has permission's (proper role) to cancel the request
+      // If user has permissions then proceed else return json: {"msg": false}
+      const user = req.user;
+      if (user && user.role === 1) {
+        const cancellationResult = await crudOperations.deletePrompt(
+          req.params.id
+        );
 
-    const cancellationResult = await crudOperations.deletePrompt(req.params.id);
-
-    if (cancellationResult === true) {
-      console.log(`Deleted prompt for id -> ${req.params.id}`);
-      res.json({ msg: true });
-    } else {
-      console.log(cancellationResult);
-      res.json({ msg: false });
+        if (cancellationResult === true) {
+          console.log(`Deleted prompt for id -> ${req.params.id}`);
+          res.json({ msg: true });
+        } else {
+          console.log(cancellationResult);
+          res.json({ msg: false });
+        }
+      } else {
+        res.json({ msg: false });
+      }
+    } catch (error) {
+      console.error(error);
+      res.json({
+        msg: "There was an issue in deleting the prompt. Check server logs",
+      });
     }
-  } catch (error) {
-    console.error(error);
-    res.json({
-      msg: "There was an issue in deleting the prompt. Check server logs",
-    });
   }
-});
+);
 
 app.delete("/delete_all_prompts", authenticateInternal(), async (req, res) => {
   try {
