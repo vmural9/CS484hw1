@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>GPT484</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body class="dashboard">
+    <section class="side-bar">
+      <button>New Chat</button>
+      <div class="history"></div>
+      <nav>
+        <p>Baked for CS484 💝</p>
+        <button class="logout" onclick="logout()">Logout</button>
+        <button class="editAccount" onclick="editAccount()">
+          Edit Account
+        </button>
+      </nav>
+    </section>
+
+    <section class="main">
+      <h1>GPT - 484</h1>
+      <p id="output"></p>
+      <div class="bottom-section">
+        <div class="input-container">
+          <input id="inputField" />
+          <div id="submit">➢</div>
+        </div>
+      </div>
+      <p class="info">
+        Fun to love GPT App for showing a Full-stack application. Allows to demo
+        a 301 Full-stack Application.
+      </p>
+    </section>
+
+    <script src="dashboardHandler.js"></script>
+  </body>
+</html>

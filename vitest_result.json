@@ -1,0 +1,242 @@
+{
+  "numTotalTestSuites": 3,
+  "numPassedTestSuites": 3,
+  "numFailedTestSuites": 0,
+  "numPendingTestSuites": 0,
+  "numTotalTests": 20,
+  "numPassedTests": 20,
+  "numFailedTests": 0,
+  "numPendingTests": 0,
+  "numTodoTests": 0,
+  "startTime": 1692985465422,
+  "success": true,
+  "testResults": [
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            ""
+          ],
+          "fullName": " (1 pts) Test for Authentication (Not Logged-in ) - /update-user ",
+          "status": "passed",
+          "title": "(1 pts) Test for Authentication (Not Logged-in ) - /update-user ",
+          "duration": 16,
+          "failureMessages": []
+        },
+        {
+          "ancestorTitles": [
+            ""
+          ],
+          "fullName": " (1 pts) Test for Authentication (Not Logged-in ) - /dashboard ",
+          "status": "passed",
+          "title": "(1 pts) Test for Authentication (Not Logged-in ) - /dashboard ",
+          "duration": 3,
+          "failureMessages": []
+        },
+        {
+          "ancestorTitles": [
+            ""
+          ],
+          "fullName": " (1 pts) Test for Authentication (Not Logged-in ) - /get_prompt_list ",
+          "status": "passed",
+          "title": "(1 pts) Test for Authentication (Not Logged-in ) - /get_prompt_list ",
+          "duration": 11,
+          "failureMessages": []
+        },
+        {
+          "ancestorTitles": [
+            ""
+          ],
+          "fullName": " (1 pts) Test for Authentication (Not Logged-in ) - /update_user ",
+          "status": "passed",
+          "title": "(1 pts) Test for Authentication (Not Logged-in ) - /update_user ",
+          "duration": 3,
+          "failureMessages": []
+        },
+        {
+          "ancestorTitles": [
+            ""
+          ],
+          "fullName": " (1 pts) Test for Authentication (Not Logged-in ) - /create_user_prompt ",
+          "status": "passed",
+          "title": "(1 pts) Test for Authentication (Not Logged-in ) - /create_user_prompt ",
+          "duration": 3,
+          "failureMessages": []
+        },
+        {
+          "ancestorTitles": [
+            ""
+          ],
+          "fullName": " (1 pts) Test for Authentication (Not Logged-in ) - /update_user_prompt ",
+          "status": "passed",
+          "title": "(1 pts) Test for Authentication (Not Logged-in ) - /update_user_prompt ",
+          "duration": 3,
+          "failureMessages": []
+        },
+        {
+          "ancestorTitles": [
+            ""
+          ],
+          "fullName": " (1 pts) Test for Authentication (Not Logged-in ) - /delete_user_prompt ",
+          "status": "passed",
+          "title": "(1 pts) Test for Authentication (Not Logged-in ) - /delete_user_prompt ",
+          "duration": 2,
+          "failureMessages": []
+        },
+        {
+          "ancestorTitles": [
+            ""
+          ],
+          "fullName": " (2 pts) Test for logging-in - /login",
+          "status": "passed",
+          "title": "(2 pts) Test for logging-in - /login",
+          "duration": 11,
+          "failureMessages": []
+        },
+        {
+          "ancestorTitles": [
+            ""
+          ],
+          "fullName": " (2 pts) Test after logging-in - /update-user",
+          "status": "passed",
+          "title": "(2 pts) Test after logging-in - /update-user",
+          "duration": 13,
+          "failureMessages": []
+        },
+        {
+          "ancestorTitles": [
+            ""
+          ],
+          "fullName": " (2 pts) Test after logging-in - Creating a new prompt",
+          "status": "passed",
+          "title": "(2 pts) Test after logging-in - Creating a new prompt",
+          "duration": 16,
+          "failureMessages": []
+        },
+        {
+          "ancestorTitles": [
+            ""
+          ],
+          "fullName": " (2 pts) Test after logging-in - /update_user_prompt",
+          "status": "passed",
+          "title": "(2 pts) Test after logging-in - /update_user_prompt",
+          "duration": 36,
+          "failureMessages": []
+        },
+        {
+          "ancestorTitles": [
+            ""
+          ],
+          "fullName": " (2 pts) Test after logging-in - /delete_user_prompt",
+          "status": "passed",
+          "title": "(2 pts) Test after logging-in - /delete_user_prompt",
+          "duration": 30,
+          "failureMessages": []
+        }
+      ],
+      "startTime": 1692985466077,
+      "endTime": 1692985466224,
+      "status": "passed",
+      "message": "",
+      "name": "/home/saga/Documents/MSCS/TA_Fall2023/HW-1/GPT484/__tests__/endPointsLocal.test.js"
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            ""
+          ],
+          "fullName": " (1 pts) Check Username",
+          "status": "passed",
+          "title": "(1 pts) Check Username",
+          "duration": 1,
+          "failureMessages": []
+        },
+        {
+          "ancestorTitles": [
+            ""
+          ],
+          "fullName": " (1 pts) Check Password Length",
+          "status": "passed",
+          "title": "(1 pts) Check Password Length",
+          "duration": 0,
+          "failureMessages": []
+        },
+        {
+          "ancestorTitles": [
+            ""
+          ],
+          "fullName": " (1 pts) Check Email ID",
+          "status": "passed",
+          "title": "(1 pts) Check Email ID",
+          "duration": 1,
+          "failureMessages": []
+        }
+      ],
+      "startTime": 1692985465944,
+      "endTime": 1692985465947,
+      "status": "passed",
+      "message": "",
+      "name": "/home/saga/Documents/MSCS/TA_Fall2023/HW-1/GPT484/__tests__/serverFunctions.test.js"
+    },
+    {
+      "assertionResults": [
+        {
+          "ancestorTitles": [
+            ""
+          ],
+          "fullName": " (2 pts) Create User and Login",
+          "status": "passed",
+          "title": "(2 pts) Create User and Login",
+          "duration": 694,
+          "failureMessages": []
+        },
+        {
+          "ancestorTitles": [
+            ""
+          ],
+          "fullName": " (2 pts) Create a single new Prompt",
+          "status": "passed",
+          "title": "(2 pts) Create a single new Prompt",
+          "duration": 267,
+          "failureMessages": []
+        },
+        {
+          "ancestorTitles": [
+            ""
+          ],
+          "fullName": " (3 pts) Create a second Prompt. Check for total prompts",
+          "status": "passed",
+          "title": "(3 pts) Create a second Prompt. Check for total prompts",
+          "duration": 570,
+          "failureMessages": []
+        },
+        {
+          "ancestorTitles": [
+            ""
+          ],
+          "fullName": " (3 pts) Edit and update a prompt from history",
+          "status": "passed",
+          "title": "(3 pts) Edit and update a prompt from history",
+          "duration": 594,
+          "failureMessages": []
+        },
+        {
+          "ancestorTitles": [
+            ""
+          ],
+          "fullName": " (3 pts) Delete a prompt from history",
+          "status": "passed",
+          "title": "(3 pts) Delete a prompt from history",
+          "duration": 528,
+          "failureMessages": []
+        }
+      ],
+      "startTime": 1692985466568,
+      "endTime": 1692985469221,
+      "status": "passed",
+      "message": "",
+      "name": "/home/saga/Documents/MSCS/TA_Fall2023/HW-1/GPT484/__tests__/testFrontEndFunctions.test.js"
+    }
+  ]
+}
